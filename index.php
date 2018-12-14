@@ -1,5 +1,4 @@
 <?php
-
 // PW Cast (Password Cast)
 
 $podcast_name = "PW Cast";
@@ -10,8 +9,8 @@ $file_formats_regexp = "/.*[m4a|mp3]/i";
 
 $podcast_dir_files = scandir_sort_by_time($directory);
 
-// scandir() that returns the content sorted by Filemodificationtime
-// https://stackoverflow.com/a/11923516
+// returns array of files in a directory sorted by file modification time
+// modified from: https://stackoverflow.com/a/11923516
 function scandir_sort_by_time($dir) {
     $ignored = array('.', '..', '.gitkeep');
 
@@ -29,6 +28,7 @@ function scandir_sort_by_time($dir) {
 }
 
 // remove non-audio files
+
 $filtered_files = array_filter($podcast_dir_files, function($filename) use($file_formats_regexp) {
   if (preg_match($file_formats_regexp, $filename)) {
     return true;
@@ -53,7 +53,7 @@ echo '<?xml version="1.0" encoding="utf-8"?'.'>'; ?>
         <?php foreach($filtered_files as $timestamp => $filename): ?>
             <item>
                 <title><?php echo $filename ?></title>
-                <link><?php echo $filename ?></link>
+                <link><?php echo $url ?>/<?php echo $filename ?></link>
                 <pubDate><?php echo gmdate('D, d M Y H:i:s +0000', $timestamp); ?></pubDate>
                 <guid isPermaLink="false"><?php echo $timestamp; ?></guid>
                 <enclosure url="<?php echo $url ?>/<?php echo urlencode($filename) ?>" />
