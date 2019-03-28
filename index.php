@@ -56,7 +56,7 @@ echo '<?xml version="1.0" encoding="utf-8"?'.'>'; ?>
                 <link><?php echo $url ?>/<?php echo $filename ?></link>
                 <pubDate><?php echo gmdate('D, d M Y H:i:s +0000', $timestamp); ?></pubDate>
                 <guid isPermaLink="false"><?php echo $timestamp; ?></guid>
-                <enclosure url="<?php echo $url ?>/<?php echo urlencode($filename) ?>" />
+                <enclosure url="<?php echo $url ?><?php echo urlencode($filename) ?>" />
                 <description><?php echo $podcast_name ?> - <?php echo gmdate('D, d M Y H:i:s +0000', $key); ?></description>
             </item>
         <? endforeach; ?>
